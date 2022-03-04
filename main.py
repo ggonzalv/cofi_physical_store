@@ -30,7 +30,7 @@ def perform_tests(n_tests,products,prices,discounts):
         values = randint(0,20,3)
         template_cart = {prod: values[i] for i,prod in enumerate(products)}
         print (f'Your shopping cart contains {template_cart}.\n Proceeding to checkout...')
-        template_price = total(template_cart,prices,discounts)
+        template_price = total(template_cart,prices,discounts,True)
         print (f'Total amount to pay: {template_price:.2f}€. Have a nice day!')
 
 
@@ -45,7 +45,7 @@ def scan(item,shopping_cart,nunits=1):
 
 
 #Calculate total price, after applying the discounts
-def total(purchase,prices,discounts):
+def total(purchase,prices,discounts,tests=False):
     
     total = 0
 
@@ -53,7 +53,8 @@ def total(purchase,prices,discounts):
     for disc in discounts.order:
         money,purchase = getattr(discounts, f'apply_{disc}')(purchase, prices)
         total += money
-        #print (f'Total money after discount {disc}: {total} and your shopping cart is {purchase}')
+        if tests:
+            print (f'Total money after discount {disc}: {total:.2f}€ and the remaining shopping cart is {purchase}')
 
     #Add remaining items, with regular prices
     for item in purchase.keys():
