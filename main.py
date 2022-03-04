@@ -35,15 +35,11 @@ def checkout(purchase,prices,discounts):
     
     total = 0
 
-    print (purchase,prices,discounts)
-    money,purchase = discounts.apply_swag(purchase)
-    total += money
+    for disc in discounts.order:
+        money,purchase = getattr(discounts, disc)(purchase,prices)
+        total += money
 
     for item in purchase.keys():
-        money,purchase = discounts.apply_bulk(purchase,prices)
-        total += money
-        money,purchase = discounts.apply_2for1(purchase,prices)
-        total += money
         total += purchase[item]*prices[item]
 
     return total
