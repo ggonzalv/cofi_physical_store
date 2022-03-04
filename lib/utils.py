@@ -1,9 +1,9 @@
 class Discounts:
-    def __init__(self):
-        self.two_for_one = ["VOUCHER","MUG"]
-        self.bulk = [("TSHIRT",19), ("VOUCHER",4)]
-        self.swag = [(["VOUCHER","TSHIRT","MUG"],25), (["TSHIRT","MUG"],20)]
-        self.order = ['apply_swag','apply_bulk','apply_2for1']
+    def __init__(self,parameters):
+        self.two_for_one = parameters['two_for_one']
+        self.bulk = parameters['bulk']
+        self.swag = parameters['swag']
+        self.order = parameters['order']
     
     def apply_swag(self,products,prices):
         total_swag = 0
@@ -41,11 +41,11 @@ class Discounts:
 
     def print_offers(self):
         print ('Check out our special offers!!\n')
-        print (f'Two for one in all these products: {self.two_for_one}\n')
-        print ('Special price if you buy 3 or more units in these products:')
+        print (f'-->Two for one in all these products:\n {self.two_for_one}\n')
+        print ('-->Special price if you buy 3 or more units in these products:')
         for n_tuple in self.bulk:
             print (f'{n_tuple[0]}: {n_tuple[1]:.2f}€')
-        print ('\nSwag discount if you buy one unit of these sets of products:')
+        print ('\n-->Swag discount if you buy one unit of these sets of products:')
         for n_tuple in self.swag:
             print (f'{n_tuple[0]}: {n_tuple[1]:.2f}€')
 
