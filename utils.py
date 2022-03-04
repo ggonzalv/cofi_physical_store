@@ -7,7 +7,6 @@ class Discounts:
     
     def apply_swag(self,products,prices):
         total_swag = 0
-        print ("hello")
         for n_tuple in self.swag:
             try:
                 while all(products[swag_item] > 0 for swag_item in n_tuple[0]):

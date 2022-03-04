@@ -3,42 +3,27 @@ import pandas as pd
 from optparse import OptionParser
 from utils import Discounts
 
+#Print information about products and discounts
 def WelcomeMessage(products,discounts):
     print (f"\nWelcome to Cofi Physical store!! This is our list of products:\n {products}\n")
     discounts.print_offers()
 
-def scan(products):
-    purchase = {}
-    continue_purchase = True
-    while continue_purchase:
-        item = input('\nSpecify your product. Type nothing to proceed to checkout\n').upper()
-        if item in purchase:
-            item = input('This product is already in your shopping cart. Type again to replace units or select another product\n').upper()
-        if item == '': continue_purchase = False
-        elif item not in products:
-            print ("This product is not present in the catalogue. Try again")
-        else:
-            validunits = False
-            while not validunits:
-                nunits = input('Specify number of units. Type nothing to go back.\n')
-                if nunits == '': break
-                elif nunits.isdigit(): 
-                    validunits = True
-                    purchase[item] =  int(nunits)
-                else:
-                    print ("This is not a valid number of items. Try again")
+#Scan different input items
+def scan(item,shopping_cart,nunits=1):
+    shopping_cart[item] += nunits
 
-    return purchase
 
-    
-def checkout(purchase,prices,discounts):
+#Calculate total price, after applying the discounts
+def total(purchase,prices,discounts):
     
     total = 0
 
+    #Apply discounts. Elements which have a discount applied are removed from the shopping cart
     for disc in discounts.order:
         money,purchase = getattr(discounts, disc)(purchase,prices)
         total += money
 
+    #Add remaining items, with regular prices
     for item in purchase.keys():
         total += purchase[item]*prices[item]
 
@@ -66,13 +51,25 @@ def main():
     prices = df.set_index('Code').to_dict()['Price']
 
     #Fill shopping cart
-    
-    shopping_cart = scan(df['Code'].tolist())
+    shopping_cart = {prod: 0 for prod in df['Code'].values} #Initialise shopping cart
+    continue_purchase = True
+    while continue_purchase:
+        item = input('\nSpecify your product. Type nothing to proceed to checkout\n').upper()
+        if item == '': continue_purchase = False
+        elif item not in df['Code'].values:
+            print ("This product is not present in the catalogue. Try again")
+        else:
+            nunits = input('Specify number of units. If no positive integer value is selected will add one.\n')
+            if nunits.isdigit(): 
+                nunits =  int(nunits)
+                scan(item,shopping_cart,nunits)
+            else:
+                scan(item,shopping_cart)
 
-    print (shopping_cart)
+    print (f'Your shopping cart contains {shopping_cart}. Proceeding to checkout')
 
-    total_price = checkout(shopping_cart,prices,discounts)
-
+    #Calculate total price
+    total_price = total(shopping_cart,prices,discounts)
     print (f'Total amount to pay: {total_price:.2f}€. Have a nice day!')
 
 
