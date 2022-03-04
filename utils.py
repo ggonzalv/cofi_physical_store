@@ -3,9 +3,11 @@ class Discounts:
         self.two_for_one = ["VOUCHER","MUG"]
         self.bulk = [("TSHIRT",19), ("VOUCHER",4)]
         self.swag = [(["VOUCHER","TSHIRT","MUG"],25), (["TSHIRT","MUG"],20)]
+        self.order = ['apply_swag','apply_bulk','apply_2for1']
     
-    def apply_swag(self,products):
+    def apply_swag(self,products,prices):
         total_swag = 0
+        print ("hello")
         for n_tuple in self.swag:
             try:
                 while all(products[swag_item] > 0 for swag_item in n_tuple[0]):
@@ -23,9 +25,7 @@ class Discounts:
                 if item == n_tuple[0]:
                     if products[item] >= 3:
                         total_bulk += products[item]*n_tuple[1]
-                    else:
-                        total_bulk += products[item]*prices[item]
-                    products[item] = 0
+                        products[item] = 0
         return total_bulk, products
 
     def apply_2for1(self,products,prices):

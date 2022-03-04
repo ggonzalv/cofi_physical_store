@@ -30,4 +30,6 @@ Discounts are handled by the ```Discounts``` class, defined inside the ```utils.
 
 *swag* (list of tuples): Each element within this list contains a tuple. The first item is a list which contains the names of the products affected by this discount. If the user selects one item of each element within the list, then a special price is applied for the three items together, as specified in the second element of the tuple. 
 
+The self parameter *order* allows the user to specify the order in which each discount is applied
+
 All new discounts can be handled inside the ```__init__``` function within the ```Discounts``` class. Then, specific functions within the ```Discounts``` class apply the associated discounts if applicable.
