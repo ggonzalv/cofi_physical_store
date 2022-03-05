@@ -64,11 +64,11 @@ def total(purchase,prices,discounts,tests=False):
 
 # #########################################################
 #
-# main function
+# main function: useCheckout
 #
 # #########################################################
 
-def main():
+def useCheckout():
     parser = OptionParser(usage = "usage: %prog arguments", version="%prog")
     parser.add_option("-c","--config",        dest="config", help="configuration file (default: %default)")
     parser.add_option("-p","--products",        dest="products", help="products file (default: %default)")
@@ -102,7 +102,7 @@ def main():
     shopping_cart = {prod: 0 for prod in products} #Initialise shopping cart
     continue_purchase = True
     while continue_purchase:
-        item = input('\nSpecify your product. Type nothing to proceed to checkout\n').upper()
+        item = input('\nSpecify your product (introduce product code). Type nothing to proceed to checkout\n').upper()
         if item == '': continue_purchase = False
         elif item not in products:
             print ("This product is not present in the catalogue. Try again")
@@ -121,9 +121,5 @@ def main():
     print (f'Total amount to pay: {total_price:.2f}€. Have a nice day!')
 
 
-
-
-
-
 if __name__ == '__main__':
-    main()
+    useCheckout()

@@ -17,7 +17,7 @@ It accepts the following parameters:
 ```--tests```: Execute several tests to check the performance of the scripts and exit.
 
 
-This code includes five main functions:
+This code calls the useCheckout main function, which involves five functions:
 
 ```readConfig``` reads the configuration file, which includes the information on possible discounts.
 
@@ -43,4 +43,4 @@ Discounts are handled by the ```Discounts``` class, defined inside the ```lib/ut
 
 *swag* (list of tuples): Each element within this list contains a tuple. The first item in the tuple is a list which contains the names of the products affected by this discount. If the user selects one item of each element within the list, then a special price is applied for the three items together. The price is specified in the second element of the tuple. 
 
-Finally, the parameter *order* allows the user to specify the order in which each discount is applied. Default is swag, bulk and then two_for_one.
+Finally, the parameter *order* allows the user to specify the order in which each discount is applied. Default is swag, two_for_one and then bulk.
