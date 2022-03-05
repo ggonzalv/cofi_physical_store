@@ -78,8 +78,7 @@ def useCheckout():
 
     #Read configuration file
     parameters = readConfig(options.config)
-
-    print (parameters)
+    
     #Import product information and discount offers. 
     discounts = Discounts(parameters)
     df = pd.read_json(options.products)
