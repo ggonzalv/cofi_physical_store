@@ -8,6 +8,15 @@ The code can be run executing the simple command:
 python main.py
 ```
 
+It accepts the following parameters:
+
+```--config```: path to the configuration file. Default is *config/config.ini*
+
+```--products```: path to the products database file. Default is *products.json*
+
+```--tests```: Execute several tests to check the performance of the scripts and exit.
+
+
 This code includes five main functions:
 
 ```readConfig``` reads the configuration file, which includes the information on possible discounts.
@@ -19,14 +28,6 @@ This code includes five main functions:
 ```scan``` allows the user to add different products to its shopping cart. It takes two mandatory arguments, the code of the product (specified by the user, not case sensitive) and the shopping cart, which is updated with each new product. It accepts one optional argument, the number of units (specified by the user, if not specified the default value is 1)
 
 ```total``` calculates the final price, taking into account the shopping cart, the price of each product and the possible discounts.
-
-It accepts the following parameters:
-
-```--config```: path to the configuration file. Default is *config/config.ini*
-
-```--products```: path to the products database file. Default is *products.json*
-
-```--tests```: Execute several tests to check the performance of the scripts and exit.
 
 ## How to include products in the catalogue
 
