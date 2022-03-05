@@ -30,13 +30,9 @@ class Discounts:
     def apply_2for1(self,products,prices):
         total_2for1 = 0
         for item in products.keys():
-            if item in self.two_for_one:
-                if products[item] > 1:
-                    total_2for1 += prices[item]*(products[item] // 2)
-                    products[item] = products[item] - 2*(products[item] // 2)
-                if products[item] == 1:
-                    total_2for1 += prices[item]
-                products[item] = 0
+            if item in self.two_for_one and products[item] > 1:
+                total_2for1 += prices[item]*(products[item] // 2)
+                products[item] = products[item] - 2*(products[item] // 2)
         return total_2for1, products
 
     def print_offers(self):
