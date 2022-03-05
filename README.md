@@ -25,7 +25,7 @@ This code includes five main functions:
 
  ```WelcomeMessage``` initializes the interaction with the interface, displaying the products in the catalogue and possible discount offers.
 
-```scan``` allows the user to add different products to its shopping cart. It takes two mandatory arguments, the code of the product (specified by the user, not case sensitive) and the shopping cart, which is updated with each new product. It accepts one optional argument, the number of units (specified by the user, if not specified the default value is 1)
+```scan``` allows the user to add different products to its shopping cart. It takes two mandatory arguments, the code of the product (specified by the user, not case sensitive) and the shopping cart, which is updated with each new product. It accepts one optional argument, the number of units of the considered product (specified by the user, if not specified the default value is 1)
 
 ```total``` calculates the final price, taking into account the shopping cart, the price of each product and the possible discounts.
 
@@ -39,8 +39,8 @@ Discounts are handled by the ```Discounts``` class, defined inside the ```lib/ut
 
 *two_for_one* (list): Each element within this list is considered for a two for one discount.
 
-*bulk* (list of tuples): Each element within this list contains a tuple. The first item is the name of the product, and the second item is the price of the item if the user buys 3 or more units of the considered product.
+*bulk* (list of tuples): Each element within this list contains a tuple. The first item in the tuple is the name of the product, and the second item is the price of the item. This is applicable if the user buys 3 or more units of the considered product.
 
-*swag* (list of tuples): Each element within this list contains a tuple. The first item in the tuple is a list which contains the names of the products affected by this discount. If the user selects one item of each element within the list, then a special price is applied for the three items together, as specified in the second element of the tuple. 
+*swag* (list of tuples): Each element within this list contains a tuple. The first item in the tuple is a list which contains the names of the products affected by this discount. If the user selects one item of each element within the list, then a special price is applied for the three items together. The price is specified in the second element of the tuple. 
 
-Finally, the parameter *order* allows the user to specify the order in which each discount is applied. 
+Finally, the parameter *order* allows the user to specify the order in which each discount is applied. Default is swag, bulk and then two_for_one.
