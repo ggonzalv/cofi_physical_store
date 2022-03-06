@@ -6,8 +6,15 @@ from optparse import OptionParser
 sys.path.append('lib')
 from utils import Discounts
 
-# Read configuration file. Extract discounts parameters
-def readConfig(configFile):
+def readConfig(configFile: str) -> dict:
+    '''
+    Read configuration file. Extract discounts parameters
+
+    input: 
+        configFile: Path to the configuration file (script)
+    output:
+        parameters: Dictionary with the discount parameters
+    '''
     parameters = {}
     try:
         with open(configFile, 'r') as inputFile:
@@ -22,9 +29,16 @@ def readConfig(configFile):
         print (f"File {configFile} does not exist!")
         sys.exit()
 
-def perform_debug(n_tests,products,prices,discounts):
+def perform_debug(n_tests: int, products: list, prices: dict,discounts: Discounts):
     '''
-    For debugging. Print out shopping carts after applying each discounts for 100 different random samples to check
+    For debugging. Print out shopping carts after applying each discount 
+    for 100 different random samples to visualise and check the process
+
+    input:
+        n_tests: number of tests to perform (int)
+        products: list of available products in catalogue (list)
+        prices: prices for each product (dictionary)
+        discounts: applicable discounts (Discounts class object)
     '''
     from numpy.random import seed,randint
     seed(1)
@@ -35,19 +49,43 @@ def perform_debug(n_tests,products,prices,discounts):
         template_price = total(template_cart,prices,discounts,True)
         print (f'Total amount to pay: {template_price:.2f}€. Have a nice day!')
 
+def WelcomeMessage(products: list, discounts: Discounts):
+    '''
+    Print information about products and discounts.
+    The user can check the information and then proceed to fill its shopping cart
 
-#Print information about products and discounts
-def WelcomeMessage(products,discounts):
+    input:
+        products: list of available products in catalogue (list)
+        discounts: applicable discounts (Discounts class object)
+
+    '''
     print (f"\nWelcome to Cofi Physical store!! This is our list of products:\n\n {products}\n")
     discounts.print_offers()
 
-#Scan different input items
-def scan(item,shopping_cart,nunits=1):
+def scan(item: str, shopping_cart: dict, nunits=1):
+    '''
+    Scan different input items. It scans one product and updates the shopping cart
+
+    Input:
+        item: Name of the scanned item (str)
+        shopping_cart: Current shopping cart of the user (dict)
+        nunits (optional): Number of units of the associated item to fill the shopping cart (int)
+    '''
     shopping_cart[item] += nunits
 
 
 #Calculate total price, after applying the discounts
-def total(purchase,prices,discounts,debug=False):
+def total(purchase: dict, prices: dict, discounts: Discounts,debug=False):
+    '''
+    Calculate total price, after applying the discounts.
+    
+    Input: 
+        purchase: This is the shopping cart (dict)
+        prices: prices for each product (dictionary)
+        discounts: applicable discounts (Discounts class object)
+    Output:
+        total: total price to be paid (float)
+    '''
     
     total = 0
 

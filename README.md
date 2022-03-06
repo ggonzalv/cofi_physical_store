@@ -2,7 +2,13 @@
 
 ## How to run the code
 
-The code can be run executing the simple command:
+First you need to build a virtualenvironment and install the necessary dependencies, as listed in ```requirements.txt``` (only pandas in this case). To do so, you can simply type:
+
+```
+source full_setup.sh
+```
+
+Now you are ready to execute the script. This can be done executing the simple command:
 
 ```
 python main.py
