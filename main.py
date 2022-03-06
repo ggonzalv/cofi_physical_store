@@ -22,8 +22,10 @@ def readConfig(configFile):
         print (f"File {configFile} does not exist!")
         sys.exit()
 
-# Perform several tests and exit
-def perform_tests(n_tests,products,prices,discounts):
+def perform_debug(n_tests,products,prices,discounts):
+    '''
+    For debugging. Print out shopping carts after applying each discounts for 100 different random samples to check
+    '''
     from numpy.random import seed,randint
     seed(1)
     for _ in range(n_tests):
@@ -45,7 +47,7 @@ def scan(item,shopping_cart,nunits=1):
 
 
 #Calculate total price, after applying the discounts
-def total(purchase,prices,discounts,tests=False):
+def total(purchase,prices,discounts,debug=False):
     
     total = 0
 
@@ -53,7 +55,7 @@ def total(purchase,prices,discounts,tests=False):
     for disc in discounts.order:
         money,purchase = getattr(discounts, f'apply_{disc}')(purchase, prices)
         total += money
-        if tests:
+        if debug:
             print (f'Total money after discount {disc}: {total:.2f}€ and the remaining shopping cart is {purchase}')
 
     #Add remaining items, with regular prices
@@ -72,8 +74,8 @@ def useCheckout():
     parser = OptionParser(usage = "usage: %prog arguments", version="%prog")
     parser.add_option("-c","--config",        dest="config", help="configuration file (default: %default)")
     parser.add_option("-p","--products",        dest="products", help="products file (default: %default)")
-    parser.add_option("-t","--tests",        dest="tests", action='store_true', help="Use a set of default values to test the script (default: %default)")
-    parser.set_defaults(config='config/config.ini', products='products.json', tests=False)
+    parser.add_option("-d","--debug",        dest="debug", action='store_true', help="Use a set of default values to test the script (default: %default)")
+    parser.set_defaults(config='config/config.ini', products='products.json', debug=False)
     (options,args) = parser.parse_args()
 
     #Read configuration file
@@ -91,10 +93,10 @@ def useCheckout():
     #Get product catalogue
     products = df['Code'].values
 
-    #Run tests and exit
-    if options.tests:
+    #Run debug and exit
+    if options.debug:
         n_tests = 100
-        perform_tests(n_tests,products,prices,discounts)
+        perform_debug(n_tests,products,prices,discounts)
         sys.exit()
 
     #Fill shopping cart
