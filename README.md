@@ -59,7 +59,7 @@ I personally recommend to run the code as:
 python main.py -d
 ```
 
-This will print out 100 different shopping carts, generated randomly. You will see the total price after applying each discount and the remaining shopping cart after the discount is applied. Then you can quickly check if the code is working as desired.
+This will print out 100 different shopping carts, generated randomly. You will see the total price after applying each discount and the remaining shopping cart after the discount is applied; and of course the total price after considering all elements in the shopping cart.. Then you can quickly check if the code is working as desired.
 
 Alternatively, the script ```test_sample.py``` contains several cases to check that the main functions of the program work properly. It will test the ```readConfig``` function, the ```scan``` function with several items added sequentially, and the ```total``` function for different shopping carts. You can carry out these checks simply typing:
 
