@@ -27,7 +27,7 @@ This code calls the useCheckout main function, which involves five functions:
 
 ```readConfig``` reads the configuration file, which includes the information on possible discounts.
 
-```perform_tests``` performs several tests using different random template samples for the user to check if the software works properly. 
+```perform_debug``` performs several tests using different random template samples for the user to check if the software works properly. 
 
  ```WelcomeMessage``` initializes the interaction with the interface, displaying the products in the catalogue and possible discount offers.
 
