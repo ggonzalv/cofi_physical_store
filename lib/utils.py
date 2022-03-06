@@ -6,7 +6,7 @@ class Discounts:
     An additional print function is included so that the user can retrieve the discounts information.
 
     Input:
-        parameters: Discount parameters (dict). More details are given in the configuration file
+        parameters: Discount parameters (dict). More details are given in the configuration file and the README
     '''
 
     def __init__(self,parameters: dict):

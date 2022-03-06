@@ -45,8 +45,10 @@ def perform_debug(n_tests: int, products: list, prices: dict,discounts: Discount
     for _ in range(n_tests):
         values = randint(0,20,3)
         template_cart = {prod: values[i] for i,prod in enumerate(products)}
+        #Print your random shopping cart
         print (f'Your shopping cart contains {template_cart}.\n Proceeding to checkout...')
         template_price = total(template_cart,prices,discounts,True)
+        #Print total price
         print (f'Total amount to pay: {template_price:.2f}€. Have a nice day!')
 
 def WelcomeMessage(products: list, discounts: Discounts):
@@ -73,15 +75,13 @@ def scan(item: str, shopping_cart: dict, nunits=1):
     '''
     shopping_cart[item] += nunits
 
-
-#Calculate total price, after applying the discounts
 def total(purchase: dict, prices: dict, discounts: Discounts,debug=False):
     '''
-    Calculate total price, after applying the discounts.
+    Apply the discounts and calculate total price
     
     Input: 
         purchase: This is the shopping cart (dict)
-        prices: prices for each product (dictionary)
+        prices: prices for each product (dict)
         discounts: applicable discounts (Discounts class object)
     Output:
         total: total price to be paid (float)
@@ -94,6 +94,7 @@ def total(purchase: dict, prices: dict, discounts: Discounts,debug=False):
         money,purchase = getattr(discounts, f'apply_{disc}')(purchase, prices)
         total += money
         if debug:
+            #Check total money after discount and remaining shopping cart
             print (f'Total money after discount {disc}: {total:.2f}€ and the remaining shopping cart is {purchase}')
 
     #Add remaining items, with regular prices
@@ -137,7 +138,7 @@ def useCheckout():
         perform_debug(n_tests,products,prices,discounts)
         sys.exit()
 
-    #Fill shopping cart
+    #Fill shopping cart. Interaction with user
     shopping_cart = {prod: 0 for prod in products} #Initialise shopping cart
     continue_purchase = True
     while continue_purchase:
