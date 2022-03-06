@@ -2,7 +2,7 @@
 
 ## How to run the code
 
-First you need to build a virtualenvironment and install the necessary dependencies, as listed in ```requirements.txt``` (only pandas in this case). To do so, you can simply type:
+First you need to build a virtualenvironment and install the necessary dependencies, as listed in ```requirements.txt``` (numpy, pandas and pytest in this case). To do so, you can simply type:
 
 ```
 source full_setup.sh
@@ -50,3 +50,19 @@ Discounts are handled by the ```Discounts``` class, defined inside the ```lib/ut
 *swag* (list of tuples): Each element within this list contains a tuple. The first item in the tuple is a list which contains the names of the products affected by this discount. If the user selects one item of each element within the list, then a special price is applied for the three items together. The price is specified in the second element of the tuple. 
 
 Finally, the parameter *order* allows the user to specify the order in which each discount is applied. Default is swag, two_for_one and then bulk.
+
+## How to check the code
+
+I personally recommend to run the code as:
+
+```
+python main.py -d
+```
+
+This will print out 100 different shopping carts, generated randomly. You will see the total price after applying each discount and the remaining shopping cart after the discount is applied. Then you can quickly check if the code is working as desired.
+
+Alternatively, the script ```test_sample.py``` contains several cases to check that the main functions of the program work properly. It will test the ```readConfig``` function, the ```scan``` function with several items added sequentially, and the ```total``` function for different shopping carts. You can carry out these checks simply typing:
+
+```
+pytest
+```
