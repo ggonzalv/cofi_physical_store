@@ -20,7 +20,7 @@ It accepts the following parameters:
 
 ```--products```: path to the products database file. Default is *products.json*
 
-```--tests```: Execute several tests to check the performance of the scripts and exit.
+```--debug```: Execute several tests to check the performance of the scripts and exit.
 
 
 This code calls the useCheckout main function, which involves five functions:
